@@ -1,17 +1,17 @@
 
-
+<% if user_signed_in? %>
 <h1>Friends List</h1>
 <br>
 <table class="table table-hover table-bordered">
   <thead class="table-dark">
     <tr>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
+      <th scope="col">Name </th>
+      <%# <th scope="col">Last</th> %>
       <th scope="col">Email</th>
       <th scope="col">Phone No</th>
-      <th scope="col">Show Details</th>
-      <th scope="col"> Edit </th>
-      <th scope="col">Destroy</th>
+      <th scope="col">User ID</th>
+      
+      <th ></th>
       
       
     </tr>
@@ -19,17 +19,29 @@
   <tbody>
     <% @friends.each do |friend| %>
     <tr>
-      <td> <%=  friend.first_name %></td>
-      <td> <%=  friend.last_name %></td>
+      <td>
+         <%= link_to friend.first_name + " " + friend.last_name, friend, class:"text-dark" %>
+        </td>
       <td> <%=  friend.email %></td>
       <td> <%=  friend.phone %></td>
-      <td> <%= link_to "Show", friend, class:"btn btn-success" %></td>
-      <td> <%= link_to "Edit ", edit_friend_path(friend), class:"btn btn-secondary" %> </td>
-      <td> <%= button_to "Destroy ", friend, method: :delete, class:"btn btn-dark" %> </td>
+      <td> <%=  friend.user_id %></td>
+      <td> <%= button_to "Destroy ", friend, method: :delete, class:"btn btn-outline-danger btn-sm" %> </td>
     </tr>
   <% end %>
   
   </tbody>
 </table>
 
-<%# <%=  link_to "New friend", new_friend_path, class:"btn btn-secondary" %>
+<%=  link_to "New friend", new_friend_path, class:"btn btn-secondary" %>
+<% else %>
+<div class="jumbotron">
+  <h1 class="display-4">Welcome to friend List !</h1>
+  <p class="lead">Here you can make a list of your friends</p>
+  <hr class="my-4">
+  <p>Go to friends to see all of your friends </p>
+  <p class="lead">
+    <%# <%= link_to "Friends", friends_path, class:"btn btn-primary btn-dark" %> 
+ 
+  </p>
+</div>
+<% end %>
